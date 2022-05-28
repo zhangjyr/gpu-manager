@@ -40,7 +40,7 @@ import (
 	// Register allocator controller
 	_ "tkestack.io/gpu-manager/pkg/services/allocator/register"
 	"tkestack.io/gpu-manager/pkg/services/display"
-	"tkestack.io/gpu-manager/pkg/services/virtual-manager"
+	vitrual_manager "tkestack.io/gpu-manager/pkg/services/virtual-manager"
 	"tkestack.io/gpu-manager/pkg/services/volume"
 	"tkestack.io/gpu-manager/pkg/services/watchdog"
 	"tkestack.io/gpu-manager/pkg/types"
@@ -167,8 +167,8 @@ func (m *managerImpl) Run() error {
 	klog.V(2).Infof("Load container response data")
 	responseManager := response.NewResponseManager()
 	if err := responseManager.LoadFromFile(m.config.DevicePluginPath); err != nil {
-		klog.Errorf("can't load container response data, %+#v", err)
-		return err
+		klog.Warningf("can't load container response data, %+#v", err)
+		// return err
 	}
 
 	m.virtualManager = vitrual_manager.NewVirtualManager(m.config, containerRuntimeManager, responseManager)
