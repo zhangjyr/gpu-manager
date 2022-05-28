@@ -40,7 +40,7 @@ import (
 	// Register allocator controller
 	_ "tkestack.io/gpu-manager/pkg/services/allocator/register"
 	"tkestack.io/gpu-manager/pkg/services/display"
-	vitrual_manager "tkestack.io/gpu-manager/pkg/services/virtual-manager"
+	virtual_manager "tkestack.io/gpu-manager/pkg/services/virtual-manager"
 	"tkestack.io/gpu-manager/pkg/services/volume"
 	"tkestack.io/gpu-manager/pkg/services/watchdog"
 	"tkestack.io/gpu-manager/pkg/types"
@@ -65,7 +65,7 @@ type managerImpl struct {
 
 	allocator      allocFactory.GPUTopoService
 	displayer      *display.Display
-	virtualManager *vitrual_manager.VirtualManager
+	virtualManager *virtual_manager.VirtualManager
 
 	bundleServer map[string]ResourceServer
 	srv          *grpc.Server
@@ -171,7 +171,7 @@ func (m *managerImpl) Run() error {
 		// return err
 	}
 
-	m.virtualManager = vitrual_manager.NewVirtualManager(m.config, containerRuntimeManager, responseManager)
+	m.virtualManager = virtual_manager.NewVirtualManager(m.config, containerRuntimeManager, responseManager)
 	m.virtualManager.Run()
 
 	treeInitFn := deviceFactory.NewFuncForName(m.config.Driver)
