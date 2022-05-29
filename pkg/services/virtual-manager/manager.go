@@ -472,7 +472,7 @@ func (vm *VirtualManager) RegisterVDevice(_ context.Context, req *vcudaapi.VDevi
 }
 
 func (vm *VirtualManager) writePidFile(filename string, contID string) error {
-	klog.V(2).Infof("Write %s", filename)
+	klog.V(2).Infof("Write %s for container %s", filename, contID)
 	cFileName := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFileName))
 

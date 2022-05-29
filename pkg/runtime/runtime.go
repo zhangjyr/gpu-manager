@@ -103,6 +103,7 @@ func (m *containerRuntimeManager) GetPidsInContainers(containerID string) ([]int
 
 	pids := make([]int, 0)
 	baseDir := filepath.Clean(filepath.Join(types.CGROUP_BASE, cgroupPath))
+	klog.V(4).Infof("Get pids in container %s, baseDir: %s", containerID, baseDir)
 	filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
 		if info == nil {
 			return nil

@@ -167,7 +167,7 @@ func (m *managerImpl) Run() error {
 	klog.V(2).Infof("Load container response data")
 	responseManager := response.NewResponseManager()
 	if err := responseManager.LoadFromFile(m.config.DevicePluginPath); err != nil {
-		klog.Warningf("can't load container response data, %+#v", err)
+		klog.Warningf("can't load container response data, %+#v, skip...", err)
 		// return err
 	}
 
